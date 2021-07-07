@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="sensitive-word-admin-web" />
+        <module name="sensitive-word-admin-service" />
+        <module name="sensitive-word-admin-util" />
+        <module name="sensitive-word-admin-dal" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sensitive-word-dal" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

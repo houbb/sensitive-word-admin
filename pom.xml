@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.houbb</groupId>
+    <artifactId>sensitive-word-admin</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>sensitive-word-admin-util</module>
+        <module>sensitive-word-admin-dal</module>
+        <module>sensitive-word-admin-service</module>
+        <module>sensitive-word-admin-web</module>
+    </modules>
+
+
+    <properties>
+        <!--============================== All Plugins START ==============================-->
+        <plugin.compiler.version>3.2</plugin.compiler.version>
+        <plugin.compiler.version>3.2</plugin.compiler.version>
+        <plugin.surefire.version>2.18.1</plugin.surefire.version>
+        <plugin.surefire.skip-it>false</plugin.surefire.skip-it>
+        <plugin.surefire.ignore-failure>false</plugin.surefire.ignore-failure>
+
+        <plugin.maven-source-plugin.version>2.2.1</plugin.maven-source-plugin.version>
+        <plugin.maven-javadoc-plugin.version>2.9.1</plugin.maven-javadoc-plugin.version>
+        <plugin.maven-gpg-plugin.version>1.5</plugin.maven-gpg-plugin.version>
+
+        <plugin.coveralls.version>4.3.0</plugin.coveralls.version>
+        <plugin.cobertura.version>2.7</plugin.cobertura.version>
+
+        <!--============================== MAIN ==============================-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.compiler.level>1.8</project.compiler.level>
+        <plugin.sufire.version>2.4.2</plugin.sufire.version>
+        <plugin.sufire.skipTest>true</plugin.sufire.skipTest>
+
+        <!--============================== INTER ==============================-->
+        <web-common.version>0.0.1</web-common.version>
+        <heaven.version>0.1.129</heaven.version>
+        <auto-log.version>0.0.13</auto-log.version>
+        <log-integration.version>1.1.8</log-integration.version>
+
+        <!--============================== OTHER ==============================-->
+        <fastjson.version>1.2.73</fastjson.version>
+        <mybatis.version>3.4.4</mybatis.version>
+        <mybatis-spring.version>1.3.1</mybatis-spring.version>
+        <mybatis-plus.version>2.3</mybatis-plus.version>
+        <java.version>1.8</java.version>
+        <mysql.version>5.1.47</mysql.version>
+        <druid.version>1.1.14</druid.version>
+        <aspectj.version>1.8.10</aspectj.version>
+        <velocity.version>2.0</velocity.version>
+        <freemarker.version>2.3.23</freemarker.version>
+        <spring-boot.version>1.5.11.RELEASE</spring-boot.version>
+        <nekohtml.version>1.9.22</nekohtml.version>
+        <validation-api.version>1.1.0.Final</validation-api.version>
+        <jwt.version>3.3.0</jwt.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--======================= SELF =====================-->
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>sensitive-word-admin-util</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>sensitive-word-admin-dal</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--======================= INTER =====================-->
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>web-common</artifactId>
+                <version>${web-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>heaven</artifactId>
+                <version>${heaven.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>auto-log-springboot-starter</artifactId>
+                <version>${auto-log.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>log-integration</artifactId>
+                <version>${log-integration.version}</version>
+            </dependency>
+
+            <!--======================= OTHER =====================-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- mybatis-plus-->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>mybatis</artifactId>
+                        <groupId>org.mybatis</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>mybatis-spring</artifactId>
+                        <groupId>org.mybatis</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- mybatis-plus自动化工具需要的依赖 模板-->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!-- alibaba的druid数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.nekohtml</groupId>
+                <artifactId>nekohtml</artifactId>
+                <version>${nekohtml.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${plugin.compiler.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${plugin.sufire.version}</version>
+                <configuration>
+                    <skipTests>${plugin.sufire.skipTest}</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
