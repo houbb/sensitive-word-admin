@@ -23,4 +23,4 @@
 
 # 应用分支
 
-[release_1.0.0-第一次初始化]()
+[release_1.0.0-第一次初始化](https://github.com/houbb/sensitive-word-admin/tree/release_1.0.0)
