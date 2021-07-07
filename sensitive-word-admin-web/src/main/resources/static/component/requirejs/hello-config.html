@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>require-js</title>
+    <script src="https://cdn.bootcss.com/require.js/2.3.5/require.js"></script>
+<body>
+</body>
+<script>
+    requirejs(["hello"], function(hello) {
+        //This function is called when scripts/helper/util.js is loaded.
+        //If util.js calls define(), then this function is not fired until
+        //util's dependencies have loaded, and the util argument will hold
+        //the module value for "helper/util".
+    });
+</script>
+</html>

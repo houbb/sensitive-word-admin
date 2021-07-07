@@ -21,6 +21,10 @@
             <groupId>com.github.houbb</groupId>
             <artifactId>heaven</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>iexcel</artifactId>
+        </dependency>
 
         <!--======================= OTHER =====================-->
         <dependency>

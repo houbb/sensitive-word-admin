@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>权限首页</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<template id="address">
+    <span>
+        my address is {{ info }}
+    </span>
+</template>
+<div id="app">
+    <my-address></my-address>
+    <my-address></my-address>
+    <my-address></my-address>
+</div>
+<script src="main.js"></script>
+<script>
+    var vm =new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+        },
+    })
+</script>
+</body>
+</html>

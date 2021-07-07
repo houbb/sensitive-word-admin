@@ -11,5 +11,14 @@
 
     <artifactId>sensitive-word-admin-service</artifactId>
 
+    <dependencies>
+        <!--======================= SELF =====================-->
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>sensitive-word-admin-dal</artifactId>
+        </dependency>
+
+        <!--======================= OTHER =====================-->
+    </dependencies>
 
 </project>

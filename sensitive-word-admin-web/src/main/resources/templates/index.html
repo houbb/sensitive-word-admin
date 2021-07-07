@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>首页</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
+    <link rel="stylesheet" href="/css/common.css"/>
+</head>
+<body>
+<div id="app">
+    <el-container direction="vertical">
+
+        <my-header></my-header>
+
+        <el-main>
+            <el-carousel indicator-position="outside" height="500px">
+                <el-carousel-item v-for="item in carouselUrls" :key="item">
+                    <el-image :src="item" fit="cover">
+                    </el-image>
+                </el-carousel-item>
+            </el-carousel>
+
+        </el-main>
+
+        <my-footer></my-footer>
+
+    </el-container>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script>
+<script src="/js/main.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'sensitive-word-admin',
+            carouselUrls: ['/img/pic1.jpg', '/img/pic2.jpg',
+                '/img/pic3.jpg', '/img/pic4.jpg'],
+            action: '',
+            formValue: ''
+        }
+    })
+</script>
+</body>
+</html>

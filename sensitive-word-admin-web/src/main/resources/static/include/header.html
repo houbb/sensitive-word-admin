@@ -1,0 +1,49 @@
+<div>
+    <el-header>
+        <a href="/">
+            <el-image style="width: 100px; height: 58px; display: inline-block;"
+                      src="/img/logo.PNG"
+                      fit="cover">
+            </el-image>
+        </a>
+
+        <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" style="float: right;">
+            <el-menu-item index="/index">
+                <a>首页</a>
+            </el-menu-item>
+            <el-submenu index="manage">
+                <template slot="title">权限管理</template>
+                <el-menu-item index="/user/index">
+                    <i class="el-icon-user-solid"></i>用户管理
+                </el-menu-item>
+                <el-menu-item index="/role/index">
+                    <i class="el-icon-magic-stick"></i>角色管理
+                </el-menu-item>
+                <el-menu-item index="/privilege/index">
+                    <i class="el-icon-lock"></i>权限管理
+                </el-menu-item>
+                <el-menu-item index="/allowList/index">
+                    <i class="el-icon-lock"></i>白名单管理
+                </el-menu-item>
+                <el-menu-item index="/denyList/index">
+                    <i class="el-icon-lock"></i>黑名单管理
+                </el-menu-item>
+            </el-submenu>
+            <el-submenu index="log">
+                <template slot="title">审计日志</template>
+                <el-menu-item index="/loginLog/index">登入日志</el-menu-item>
+                <el-menu-item index="/logoutLog/index">登出日志</el-menu-item>
+                <el-menu-item index="/operateLog/index">操作日志</el-menu-item>
+            </el-submenu>
+            <el-submenu index="more">
+                <template slot="title">更多</template>
+                <el-menu-item index="/aboutUs">关于我们</el-menu-item>
+                <el-menu-item index="/changeLog/index">变更日志</el-menu-item>
+                <el-menu-item index="/version">版本信息</el-menu-item>
+                <el-menu-item index="/login/logout">
+                    <i class="el-icon-switch-button"></i>登出
+                </el-menu-item>
+            </el-submenu>
+        </el-menu>
+    </el-header>
+</div>

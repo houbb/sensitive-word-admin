@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>敏感词操作日志表首页</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
+    <link rel="stylesheet" href="/css/common.css"/>
+</head>
+<body>
+<div id="app">
+    <el-container direction="vertical">
+        <my-header></my-header>
+
+        <el-main>
+
+            <el-form :model="queryForm" ref="queryForm" :inline="true" label-width="100px">
+                        <el-form-item label="批次号" label-width="100px">
+                            <el-input v-model="queryForm.batchId"
+                                      style="width: 217px;"></el-input>
+                        </el-form-item>
+                        <el-form-item label="单词" label-width="100px">
+                            <el-input v-model="queryForm.word"
+                                      style="width: 217px;"></el-input>
+                        </el-form-item>
+                        <el-form-item label="类型" label-width="100px">
+                            <el-select v-model="queryForm.type" placeholder="请选择">
+                                <el-option
+                                        v-for="item in typeOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="单词状态。S:启用;F:禁用" label-width="100px">
+                            <el-select v-model="queryForm.status" placeholder="请选择">
+                                <el-option
+                                        v-for="item in statusOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="配置描述" label-width="100px">
+                            <el-input v-model="queryForm.remark"
+                                      style="width: 217px;"></el-input>
+                        </el-form-item>
+
+                <el-form-item>
+                    <el-button-group>
+                        <el-button type="primary" @click="doQuery('queryForm')" icon="el-icon-search">查询</el-button>
+                        <el-button type="warning" @click="doQueryClear('queryForm')" icon="el-icon-refresh-right">重置</el-button>
+                        <el-button type="default" @click="doExport('queryForm')" icon="el-icon-download">导出</el-button>
+                    </el-button-group>
+
+                    <el-button type="success" @click="dialogAddVisible = true" icon="el-icon-plus">新增</el-button>
+                </el-form-item>
+
+            </el-form>
+
+            <el-divider></el-divider>
+
+            <el-table
+                    ref="singleTable"
+                    :data="tableData"
+                    border
+                    stripe
+                    style="width: 100%">
+                </el-table-column>
+
+                        <el-table-column
+                                property="id"
+                                label="应用自增主键">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="batchId"
+                                label="批次号">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="word"
+                                label="单词">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="type"
+                                label="类型"
+                                :formatter="typeFormatter">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="status"
+                                label="单词状态。S:启用;F:禁用"
+                                :formatter="statusFormatter">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="remark"
+                                label="配置描述">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="operatorId"
+                                label="操作员名称">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="createTime"
+                                label="创建时间戳">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="updateTime"
+                                label="更新时间戳">
+                        </el-table-column>
+
+
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button-group>
+                            <el-button
+                                    size="mini"
+                                    @click="handleEdit(scope.row)"><i class="el-icon-edit"></i></el-button>
+                            <el-button
+                                    size="mini"
+                                    type="danger"
+                                    @click="handleDelete(scope.row)"><i class="el-icon-delete"></i></el-button>
+                        </el-button-group>
+                    </template>
+                </el-table-column>
+            </el-table>
+
+            <el-pagination
+                    background
+                    layout="total, prev, pager, next"
+                    :data="page"
+                    :total="page.total"
+                    :current-page="page.pageNum"
+                    :page-size="page.pageSize"
+                    @current-change="handleCurrentChange"
+            >
+            </el-pagination>
+
+        </el-main>
+
+        <my-footer></my-footer>
+
+        <el-dialog title="添加敏感词操作日志表" :visible.sync="dialogAddVisible">
+            <el-form :model="addForm"  ref="addForm">
+                        <el-form-item label="批次号"
+                                      prop="batchId"
+                                      label-width="100px">
+                            <el-input v-model="addForm.batchId" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item label="单词"
+                                      prop="word"
+                                      label-width="100px">
+                            <el-input v-model="addForm.word" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item label="类型" label-width="100px">
+                            <el-select v-model="addForm.type" placeholder="请选择">
+                                <el-option
+                                        v-for="item in typeOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="单词状态。S:启用;F:禁用" label-width="100px">
+                            <el-select v-model="addForm.status" placeholder="请选择">
+                                <el-option
+                                        v-for="item in statusOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="配置描述"
+                                      prop="remark"
+                                      label-width="100px">
+                            <el-input v-model="addForm.remark" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogAddVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveAddForm('addForm')">确 定</el-button>
+            </div>
+        </el-dialog>
+
+        <el-dialog title="修改敏感词操作日志表" :visible.sync="dialogEditVisible" @close="closeDialogEditVisible">
+            <el-form :model="editForm" ref="editForm">
+
+                        <el-form-item label="批次号"
+                                      prop="batchId"
+                                      label-width="100px">
+                            <el-input v-model="editForm.batchId" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item label="单词"
+                                      prop="word"
+                                      label-width="100px">
+                            <el-input v-model="editForm.word" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item label="类型" label-width="100px">
+                            <el-select v-model="editForm.type" placeholder="请选择">
+                                <el-option
+                                        v-for="item in typeOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="单词状态。S:启用;F:禁用" label-width="100px">
+                            <el-select v-model="editForm.status" placeholder="请选择">
+                                <el-option
+                                        v-for="item in statusOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="配置描述"
+                                      prop="remark"
+                                      label-width="100px">
+                            <el-input v-model="editForm.remark" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogEditVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveEditForm('editForm')">确 定</el-button>
+            </div>
+        </el-dialog>
+
+    </el-container>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<!--axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script>
+<script src="/js/main.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            tableData: [],
+            page: {
+                total: 0,
+                pageNum: 1,
+                pageSize: 10
+            },
+                    typeOptions: [
+                        {
+                            value: 'ALLOW',
+                            label: '允许'
+                        },
+                        {
+                            value: 'DENY',
+                            label: '禁止'
+                        },
+                    ],
+                    statusOptions: [
+                        {
+                            value: 'F',
+                            label: '失效'
+                        },
+                        {
+                            value: 'S',
+                            label: '正常'
+                        },
+                    ],
+            dialogAddVisible: false,
+            addForm: {
+                batchId: '',
+                word: '',
+                type: '',
+                status: '',
+                remark: '',
+            },
+            queryForm: {
+                batchId: null,
+                word: null,
+                type: null,
+                status: null,
+                remark: null,
+            },
+            dialogEditVisible: false,
+            editForm: {
+                batchId: '',
+                word: '',
+                type: '',
+                status: '',
+                remark: '',
+            },
+        },
+        mounted () {
+            // 接在完成之后，调用初始化方法
+            this.init()
+        },
+        methods: {
+            init() {
+                // 加载数据
+                this.doQuery();
+            },
+            // 格式化输出方法
+                typeFormatter(row, column) {
+                    if(row.type === 'ALLOW') {
+                        return '允许';
+                    }
+                    if(row.type === 'DENY') {
+                        return '禁止';
+                    }
+                },
+                statusFormatter(row, column) {
+                    if(row.status === 'F') {
+                        return '失效';
+                    }
+                    if(row.status === 'S') {
+                        return '正常';
+                    }
+                },
+
+            doQuery() {
+                var req = {
+                    id: this.queryForm.id,
+                    batchId: this.queryForm.batchId,
+                    word: this.queryForm.word,
+                    type: this.queryForm.type,
+                    status: this.queryForm.status,
+                    remark: this.queryForm.remark,
+                    operatorId: this.queryForm.operatorId,
+                    createTime: this.queryForm.createTime,
+                    updateTime: this.queryForm.updateTime,
+                    pageNum: this.page.pageNum,
+                    pageSize: this.page.pageSize
+                }
+
+                console.log("请求：" + JSON.stringify(req));
+                //axios 中的 this 并不指向 vue
+                var _this = this;
+                axios.post('/wordLog/list', req).then(function (response) {
+                    if(response.data.respCode === '0000') {
+                        _this.tableData = response.data.list;
+                        _this.page.total = response.data.total;
+                    } else {
+                        ELEMENT.Message.error(response.data.respMessage);
+                    }
+                }).catch(function (error) {
+                    ELEMENT.Message.error("请求失败");
+                    console.log(error);
+                });
+            },
+            doQueryClear() {
+                this.queryForm.id = null;
+                this.queryForm.batchId = null;
+                this.queryForm.word = null;
+                this.queryForm.type = null;
+                this.queryForm.status = null;
+                this.queryForm.remark = null;
+                this.queryForm.operatorId = null;
+                this.queryForm.createTime = null;
+                this.queryForm.updateTime = null;
+
+                this.doQuery();
+            },
+            doExport() {
+                var req = {
+                    id: this.queryForm.id,
+                    batchId: this.queryForm.batchId,
+                    word: this.queryForm.word,
+                    type: this.queryForm.type,
+                    status: this.queryForm.status,
+                    remark: this.queryForm.remark,
+                    operatorId: this.queryForm.operatorId,
+                    createTime: this.queryForm.createTime,
+                    updateTime: this.queryForm.updateTime,
+                }
+
+                console.log("请求：" + JSON.stringify(req));
+                //axios 中的 this 并不指向 vue
+                var _this = this;
+                axios({ // 用axios发送post请求
+                    method: 'post',
+                    url: '/wordLog/export', // 请求地址
+                    data: req, // 参数
+                    responseType: 'blob', // 表明返回服务器返回的数据类型
+                    headers: {'Content-Type': 'application/json'}
+                }).
+                then(function (response) {
+                    let fileName = window.decodeURI(response.headers['content-disposition'].split('=')[1]);
+                    let link = document.createElement("a");
+                    const blob =new Blob([response.data]);
+                    link.href = window.URL.createObjectURL(blob);
+                    link.target = "_blank";
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }).catch(function (error) {
+                    ELEMENT.Message.error("请求失败");
+                    console.log(error);
+                });
+            },
+            /**
+             * 处理删除逻辑
+             * @param row 当前行
+             */
+            handleDelete(row) {
+                var id = row.id;
+                var _this = this;
+                axios.post('/wordLog/remove/' + id).then(function (response) {
+                    if(response.data.respCode === '0000') {
+                        _this.doQuery();
+
+                        ELEMENT.Message.success("删除成功");
+                        visible = false;
+                    } else {
+                        ELEMENT.Message.error(response.data.respMessage);
+                    }
+                }).catch(function (error) {
+                    ELEMENT.Message.error("删除失败");
+                });
+            },
+            /**
+             * 处理页面变化
+             * @param val 当前页面
+             */
+            handleCurrentChange(val) {
+                this.page.pageNum = val;
+                this.doQuery();
+            },
+            /**
+             * 关闭新增模态框
+             */
+            closeDialogAddVisible() {
+                //element封装的方法,清空模态框的值
+                this.$refs.addForm.resetFields();
+                this.dialogAddVisible = false;
+            },
+            /**
+             * 保存新增数据
+             * @param aaa 表单信息
+             */
+            saveAddForm(aaa) {
+                var _this = this;
+
+                var entity = {
+                    id: this.addForm.id,
+                    batchId: this.addForm.batchId,
+                    word: this.addForm.word,
+                    type: this.addForm.type,
+                    status: this.addForm.status,
+                    remark: this.addForm.remark,
+                    operatorId: this.addForm.operatorId,
+                    createTime: this.addForm.createTime,
+                    updateTime: this.addForm.updateTime,
+                }
+                axios.post('/wordLog/add', entity).then(function (response) {
+                    if(response.data.respCode === '0000') {
+                        ELEMENT.Message.success("请求成功");
+                        _this.closeDialogAddVisible();
+                        _this.doQuery();
+                    } else {
+                        ELEMENT.Message.error(response.data.respMessage);
+                    }
+                }).catch(function (error) {
+                    ELEMENT.Message.error("请求失败");
+                    console.log(error);
+                });
+            },
+            /**
+             * 关闭编辑页面
+             */
+            closeDialogEditVisible() {
+                //element封装的方法,清空模态框的值
+                this.$refs.editForm.resetFields();
+                this.dialogEditVisible = false;
+            },
+            handleEdit(row) {
+                this.editForm.id = row.id;
+                this.editForm.batchId = row.batchId;
+                this.editForm.word = row.word;
+                this.editForm.type = row.type;
+                this.editForm.status = row.status;
+                this.editForm.remark = row.remark;
+                this.editForm.operatorId = row.operatorId;
+                this.editForm.createTime = row.createTime;
+                this.editForm.updateTime = row.updateTime;
+
+                // 显示编辑 form
+                this.dialogEditVisible = true;
+            },
+            /**
+             * 保存编辑表单
+             * @param editForm 编辑表单
+             */
+            saveEditForm(editForm) {
+                var entity = {
+                    id: this.editForm.id,
+                    batchId: this.editForm.batchId,
+                    word: this.editForm.word,
+                    type: this.editForm.type,
+                    status: this.editForm.status,
+                    remark: this.editForm.remark,
+                    operatorId: this.editForm.operatorId,
+                    createTime: this.editForm.createTime,
+                    updateTime: this.editForm.updateTime,
+                };
+                // 此处使用 qs 序列化，后端不需要使用 @RequestBody 注解。
+                var data = Qs.stringify(entity);
+                var _this = this;
+                axios.post('/wordLog/edit', data).then(function (response) {
+                    if(response.data.respCode === '0000') {
+                        ELEMENT.Message.success("请求成功");
+                        _this.doQuery();
+                        _this.closeDialogEditVisible();
+                    } else {
+                        ELEMENT.Message.error(response.data.respMessage);
+                    }
+                }).catch(function (error) {
+                    ELEMENT.Message.error("请求失败");
+                    console.log(error);
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

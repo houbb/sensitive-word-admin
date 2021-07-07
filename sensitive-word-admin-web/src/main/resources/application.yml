@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    druid:
+      username: root
+      password: 123456
+      url: jdbc:mysql://localhost:3306/sensitive_word?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+      driver-class-name: com.mysql.jdbc.Driver
+
+  ## MVC
+  # 默认配置会自动在 /public /static /resources 目录寻找静态资源, 故不需要 /static 等前缀
+  mvc:
+    static-path-pattern: /**
+    # 接受日期参数问题
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  # 页面日期显示问题
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    mode: LEGACYHTML5
+    content-type: text/html
+#    mode: HTML
+    cache: false
+
+mybatis-plus:
+  mapper-locations: classpath*:com/github/houbb/sensitive/word/admin/dal/mapper/*Mapper.xml
+  type-aliases-package: com.github.houbb.sensitive.word.admin.dal.entity

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>require-js</title>
+    <script src="https://cdn.bootcss.com/require.js/2.3.5/require.js"></script>
+<body>
+    <div id="header"></div>
+</body>
+<script>
+    requirejs.config({
+        paths:{
+            // 默认就是 js 资源，不需要使用后缀
+            "text": "require-text",
+        }
+    });
+
+    requirejs(["text!header.html"], function(header) {
+        // 将文件内容写入到当前页面
+        console.log(header);
+        document.getElementById("header").innerHTML = header;
+    });
+</script>
+</html>

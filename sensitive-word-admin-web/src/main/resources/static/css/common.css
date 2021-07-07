@@ -1,0 +1,41 @@
+.el-footer {
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+}
+
+.el-main {
+    color: #333;
+    text-align: center;
+    padding-top: 100px;
+    height: 520px;
+}
+
+#app, html, body, .el-container {
+    height: 100%;
+}
+
+#app {
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.el-pagination {
+    padding-top: 100px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
