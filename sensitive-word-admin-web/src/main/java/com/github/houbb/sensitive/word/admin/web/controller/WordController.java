@@ -4,6 +4,7 @@ import com.github.houbb.auto.log.annotation.AutoLog;
 import com.github.houbb.auto.log.annotation.TraceId;
 import com.github.houbb.heaven.util.io.FileUtil;
 import com.github.houbb.iexcel.util.ExcelHelper;
+import com.github.houbb.sensitive.word.bs.SensitiveWordBs;
 import com.github.houbb.web.common.dto.resp.BaseResp;
 import com.github.houbb.web.common.dto.resp.BasePageInfo;
 import com.github.houbb.web.common.util.RespUtil;
@@ -38,6 +39,9 @@ public class WordController {
     @Autowired
     private WordService wordService;
 
+    @Autowired
+    private SensitiveWordBs sensitiveWordBs;
+
     /**
     * 首页
     */
@@ -56,6 +60,7 @@ public class WordController {
     public BaseResp add(@RequestBody final Word entity) {
         wordService.insert(entity);
 
+        refreshSensitiveWord();
         return RespUtil.success();
     }
 
@@ -69,6 +74,7 @@ public class WordController {
     public BaseResp edit(final Word entity) {
         wordService.updateById(entity);
 
+        refreshSensitiveWord();
         return RespUtil.success();
     }
 
@@ -81,6 +87,8 @@ public class WordController {
     @ResponseBody
     public BaseResp remove(@PathVariable final Integer id) {
         wordService.deleteById(id);
+
+        refreshSensitiveWord();
         return RespUtil.success();
     }
 
@@ -133,6 +141,16 @@ public class WordController {
         } finally {
             FileUtil.deleteFile(file);
         }
+    }
+
+    /**
+     * 刷新敏感詞
+     *
+     * 可以优化为异步，甚至批量。
+     * @since 1.1.0
+     */
+    private void refreshSensitiveWord() {
+        sensitiveWordBs.init();
     }
 
 }

@@ -38,7 +38,7 @@
         <plugin.sufire.skipTest>true</plugin.sufire.skipTest>
 
         <!--============================== INTER ==============================-->
-        <web-common.version>0.0.1</web-common.version>
+        <web-common.version>0.0.2</web-common.version>
         <heaven.version>0.1.129</heaven.version>
         <auto-log.version>0.0.13</auto-log.version>
         <log-integration.version>1.1.8</log-integration.version>
@@ -110,6 +110,11 @@
                 <groupId>com.github.houbb</groupId>
                 <artifactId>iexcel</artifactId>
                 <version>${iexcel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>sensitive-word</artifactId>
+                <version>0.0.15</version>
             </dependency>
 
             <!--======================= OTHER =====================-->
