@@ -24,34 +24,22 @@ Vue.component('my-header', {
         '            <el-menu-item index="/index">\n' +
         '                <a>首页</a>\n' +
         '            </el-menu-item>\n' +
-        '            <el-submenu index="system">\n' +
-        '                <template slot="title">系统管理</template>\n' +
-        '                <el-menu-item index="/sysOperator/index">\n' +
-        '                    <i class="el-icon-user-solid"></i>操作员管理\n' +
-        '                </el-menu-item>\n' +
-        '                <el-menu-item index="/sysApi/index">\n' +
-        '                    <i class="el-icon-collection"></i>接口管理\n' +
-        '                </el-menu-item>\n' +
-        '                <el-menu-item index="/app/index">\n' +
-        '                    <i class="el-icon-mobile"></i>应用管理\n' +
-        '                </el-menu-item>\n' +
-        '            </el-submenu>\n' +
         '            <el-submenu index="manage">\n' +
-        '                <template slot="title">权限管理</template>\n' +
-        '                <el-menu-item index="/user/index">\n' +
-        '                    <i class="el-icon-user-solid"></i>用户管理\n' +
+        '                <template slot="title">功能管理</template>\n' +
+                        '                <el-menu-item index="/lcEnumMapping/index">\n' +
+        '                    <i class="el-icon-user-solid"></i>枚举映射表\n' +
         '                </el-menu-item>\n' +
-        '                <el-menu-item index="/role/index">\n' +
-        '                    <i class="el-icon-magic-stick"></i>角色管理\n' +
+        '                <el-menu-item index="/tag/index">\n' +
+        '                    <i class="el-icon-user-solid"></i>标签表\n' +
         '                </el-menu-item>\n' +
-        '                <el-menu-item index="/privilege/index">\n' +
-        '                    <i class="el-icon-lock"></i>权限管理\n' +
+        '                <el-menu-item index="/word/index">\n' +
+        '                    <i class="el-icon-user-solid"></i>敏感词表\n' +
         '                </el-menu-item>\n' +
-        '                <el-menu-item index="/allowList/index">\n' +
-        '                    <i class="el-icon-sunny"></i>白名单管理\n' +
+        '                <el-menu-item index="/wordLog/index">\n' +
+        '                    <i class="el-icon-user-solid"></i>敏感词操作日志表\n' +
         '                </el-menu-item>\n' +
-        '                <el-menu-item index="/denyList/index">\n' +
-        '                    <i class="el-icon-moon"></i>黑名单管理\n' +
+        '                <el-menu-item index="/wordTagMapping/index">\n' +
+        '                    <i class="el-icon-user-solid"></i>标签单词映射表\n' +
         '                </el-menu-item>\n' +
         '            </el-submenu>\n' +
         '            <el-submenu index="log">\n' +

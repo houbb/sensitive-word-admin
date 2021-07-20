@@ -1,24 +1,24 @@
 package com.github.houbb.sensitive.word.admin.util.enums;
 
 /**
-* æšä¸¾å€¼
+* Ã¶¾ÙÖµ
 * @author binbin.hou
 */
 public enum WordTypeEnum {
     /**
-    * æšä¸¾å€¼
+    * Ã¶¾ÙÖµ
     */
-    ALLOW("ALLOW", "å…è®¸"),
-    DENY("DENY", "ç¦æ­¢"),
+    ALLOW("ALLOW", "ÔÊĞí"),
+    DENY("DENY", "½ûÖ¹"),
     ;
 
     /**
-    * ç¼–ç 
+    * ±àÂë
     */
     private final String code;
 
     /**
-    * æè¿°
+    * ÃèÊö
     */
     private final String desc;
 
