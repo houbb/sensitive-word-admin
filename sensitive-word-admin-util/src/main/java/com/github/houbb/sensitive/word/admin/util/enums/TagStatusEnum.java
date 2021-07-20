@@ -1,24 +1,24 @@
 package com.github.houbb.sensitive.word.admin.util.enums;
 
 /**
-* Ã¶¾ÙÖµ
-* @author binbin.hou
+* æšä¸¾å€¼
+* @author Administrator
 */
 public enum TagStatusEnum {
     /**
-    * Ã¶¾ÙÖµ
+    * æšä¸¾å€¼
     */
-    F("F", "Ê§Ğ§"),
-    S("S", "Õı³£"),
+    F("F", "å¤±æ•ˆ"),
+    S("S", "æ­£å¸¸"),
     ;
 
     /**
-    * ±àÂë
+    * ç¼–ç 
     */
     private final String code;
 
     /**
-    * ÃèÊö
+    * æè¿°
     */
     private final String desc;
 
