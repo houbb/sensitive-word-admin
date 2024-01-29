@@ -30,8 +30,8 @@ public class SensitiveWordConfig {
     @Bean
     public SensitiveWordBs sensitiveWordBs() {
         return SensitiveWordBs.newInstance()
-                .wordAllow(WordAllows.chains(WordAllows.system(), myDdWordAllow))
-                .wordDeny(WordDenys.chains(WordDenys.system(), myDdWordDeny))
+                .wordAllow(WordAllows.chains(WordAllows.defaults(), myDdWordAllow))
+                .wordDeny(WordDenys.chains(WordDenys.defaults(), myDdWordDeny))
                 .ignoreRepeat(false)
                 // 各种其他配置
                 .init();

@@ -2,7 +2,6 @@ package com.github.houbb.sensitive.word.admin.web.controller;
 
 
 import com.github.houbb.auto.log.annotation.AutoLog;
-import com.github.houbb.auto.log.annotation.TraceId;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,7 +16,6 @@ import java.io.IOException;
  * @since 2020-09-18
  */
 @Controller
-@TraceId
 @AutoLog
 public class MyIndexController {
 

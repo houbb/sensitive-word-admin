@@ -5,13 +5,15 @@ import com.github.houbb.sensitive.word.admin.dal.entity.po.LcEnumMappingPagePo;
 import com.baomidou.mybatisplus.service.IService;
 import com.github.houbb.web.common.dto.resp.BasePageInfo;
 
+import java.util.List;
+
 /**
  * <p>
  * 枚举映射表 服务类
  * </p>
  *
  * @author Administrator
- * @since 2021-07-07
+ * @since 2024-01-29
  */
 public interface LcEnumMappingService extends IService<LcEnumMapping> {
 
@@ -21,5 +23,11 @@ public interface LcEnumMappingService extends IService<LcEnumMapping> {
     * @return 结果
     */
     BasePageInfo<LcEnumMapping> pageQueryList(LcEnumMappingPagePo pageReq);
+
+    /**
+    * 批量删除
+    * @param ids id 列表
+    */
+    void deleteBatch(final List<Integer> ids);
 
 }

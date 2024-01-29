@@ -1,7 +1,6 @@
 package com.github.houbb.sensitive.word.admin.web.controller.api;
 
 import com.github.houbb.auto.log.annotation.AutoLog;
-import com.github.houbb.auto.log.annotation.TraceId;
 import com.github.houbb.sensitive.word.bs.SensitiveWordBs;
 import com.github.houbb.web.common.dto.resp.BaseResp;
 import com.github.houbb.web.common.util.RespUtil;
@@ -20,7 +19,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/sensitiveWord/")
 @AutoLog
-@TraceId
 public class ApiSensitiveWordController {
 
     @Autowired

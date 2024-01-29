@@ -8,7 +8,7 @@ import com.github.houbb.sensitive.word.admin.dal.entity.LcEnumMapping;
  * </p>
  *
  * @author Administrator
- * @since 2021-07-07
+ * @since 2024-01-29
  */
 public class LcEnumMappingPagePo extends LcEnumMapping {
 

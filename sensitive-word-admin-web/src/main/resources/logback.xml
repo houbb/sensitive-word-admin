@@ -98,10 +98,10 @@
     </appender>
 
     <!--com.huifu 包路径 additivity： 表示是否 想上层传递)-->
-    <logger name="com.github.houbb.low.code" level="INFO" additivity="true">
+    <logger name="com.github.houbb.sensitive.word" level="INFO" additivity="true">
         <appender-ref ref="APPLICATION-APPENDER"/>
     </logger>
-    <logger name="com.github.houbb.low.code.dal" level="DEBUG" additivity="false">
+    <logger name="com.github.houbb.sensitive.word.dal" level="DEBUG" additivity="false">
         <appender-ref ref="ASYNC-SQL"/>
     </logger>
 

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author Administrator
- * @since 2021-07-07
+ * @since 2024-01-29
  */
 public interface WordTagMappingMapper extends BaseMapper<WordTagMapping> {
 

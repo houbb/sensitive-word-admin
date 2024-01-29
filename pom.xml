@@ -38,11 +38,14 @@
         <plugin.sufire.skipTest>true</plugin.sufire.skipTest>
 
         <!--============================== INTER ==============================-->
-        <web-common.version>0.0.2</web-common.version>
-        <heaven.version>0.1.129</heaven.version>
-        <auto-log.version>0.0.13</auto-log.version>
+        <web-common.version>0.0.6</web-common.version>
+        <heaven.version>0.8.0</heaven.version>
+        <auto-log.version>0.12.0</auto-log.version>
         <log-integration.version>1.1.8</log-integration.version>
         <iexcel.version>0.0.9</iexcel.version>
+        <menu-core.version>1.0.0</menu-core.version>
+        <privilege-core.version>0.0.8</privilege-core.version>
+        <sensitive-word.version>0.12.0</sensitive-word.version>
 
         <!--============================== OTHER ==============================-->
         <fastjson.version>1.2.73</fastjson.version>
@@ -114,7 +117,17 @@
             <dependency>
                 <groupId>com.github.houbb</groupId>
                 <artifactId>sensitive-word</artifactId>
-                <version>0.0.15</version>
+                <version>${sensitive-word.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>menu-core</artifactId>
+                <version>${menu-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>privilege-core</artifactId>
+                <version>${privilege-core.version}</version>
             </dependency>
 
             <!--======================= OTHER =====================-->
@@ -223,6 +236,7 @@
                 <artifactId>validation-api</artifactId>
                 <version>${validation-api.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

@@ -6,6 +6,7 @@
     <!-- 引入样式 -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
     <link rel="stylesheet" href="/css/common.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
 <div id="app">
@@ -58,6 +59,7 @@
                     border
                     stripe
                     style="width: 100%">
+                <el-table-column type="index" label="序号" width="60">
                 </el-table-column>
 
                         <el-table-column
@@ -210,7 +212,7 @@
     </el-container>
 </div>
 
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
 <!-- 引入组件库 -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
@@ -368,7 +370,6 @@
                         _this.doQuery();
 
                         ELEMENT.Message.success("删除成功");
-                        visible = false;
                     } else {
                         ELEMENT.Message.error(response.data.respMessage);
                     }

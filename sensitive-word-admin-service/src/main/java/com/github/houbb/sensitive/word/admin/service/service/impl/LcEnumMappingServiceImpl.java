@@ -6,6 +6,7 @@ import com.github.houbb.sensitive.word.admin.dal.mapper.LcEnumMappingMapper;
 import com.github.houbb.sensitive.word.admin.service.service.LcEnumMappingService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.github.houbb.web.common.dto.resp.BasePageInfo;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -16,6 +17,7 @@ import com.github.houbb.heaven.util.lang.reflect.ReflectFieldUtil;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Collections;
 
 /**
  * <p>
@@ -23,10 +25,18 @@ import java.util.List;
  * </p>
  *
  * @author Administrator
- * @since 2021-07-07
+ * @since 2024-01-29
  */
 @Service
 public class LcEnumMappingServiceImpl extends ServiceImpl<LcEnumMappingMapper, LcEnumMapping> implements LcEnumMappingService {
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteBatch(List<Integer> ids) {
+        for(Integer id : ids) {
+            this.deleteById(id);
+        }
+    }
 
     /**
     * 分页查询
@@ -43,6 +53,7 @@ public class LcEnumMappingServiceImpl extends ServiceImpl<LcEnumMappingMapper, L
         BasePageInfo<LcEnumMapping> pageInfo = new BasePageInfo<>();
         pageInfo.setList(page.getRecords());
         pageInfo.setTotal(page.getTotal());
+        pageInfo.setTotalPages(page.getPages());
         return pageInfo;
     }
 
@@ -78,6 +89,8 @@ public class LcEnumMappingServiceImpl extends ServiceImpl<LcEnumMappingMapper, L
             wrapper.eq(columnName, fieldValue);
         }
 
+        // 更新时间倒排
+        wrapper.orderDesc(Collections.singleton("update_time"));
         return wrapper;
     }
 

@@ -1,12 +1,13 @@
 package com.github.houbb.sensitive.word.admin.web.controller;
 
+import com.github.houbb.menu.api.annotation.Menu;
 import com.github.houbb.auto.log.annotation.AutoLog;
-import com.github.houbb.auto.log.annotation.TraceId;
 import com.github.houbb.heaven.util.io.FileUtil;
 import com.github.houbb.iexcel.util.ExcelHelper;
 import com.github.houbb.web.common.dto.resp.BaseResp;
 import com.github.houbb.web.common.dto.resp.BasePageInfo;
 import com.github.houbb.web.common.util.RespUtil;
+import com.github.houbb.privilege.api.annotation.PrivilegeAcquire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.github.houbb.sensitive.word.admin.service.service.WordTagMappingService;
@@ -20,6 +21,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.List;
+
+
 
 /**
  * <p>
@@ -27,21 +31,24 @@ import java.net.URLEncoder;
  * </p>
  *
  * @author Administrator
- * @since 2021-07-07
+ * @since 2024-01-29
  */
 @Controller
 @RequestMapping("/wordTagMapping")
-@TraceId
 @AutoLog
+@Menu(id = "word-tag-mapping", name = "标签单词映射表", orderNum = 0, type = "MENU", level = 1)
 public class WordTagMappingController {
 
     @Autowired
     private WordTagMappingService wordTagMappingService;
 
     /**
-    * 首页
+    * 首页信息
+    * @return 结果
     */
     @RequestMapping("/index")
+    @PrivilegeAcquire({"admin", "word-tag-mapping-index"})
+    @Menu(id = "word-tag-mapping-index", pid = "word-tag-mapping", name = "标签单词映射表-首页", orderNum = 0, type = "INDEX", level = 2)
     public String index() {
         return "wordTagMapping/index";
     }
@@ -53,6 +60,8 @@ public class WordTagMappingController {
     */
     @RequestMapping("/add")
     @ResponseBody
+    @PrivilegeAcquire({"admin", "word-tag-mapping-add"})
+    @Menu(id = "word-tag-mapping-add", pid = "word-tag-mapping", name = "标签单词映射表-添加", orderNum = 1, type = "API", level = 2)
     public BaseResp add(@RequestBody final WordTagMapping entity) {
         wordTagMappingService.insert(entity);
 
@@ -66,10 +75,27 @@ public class WordTagMappingController {
     */
     @RequestMapping("/edit")
     @ResponseBody
+    @PrivilegeAcquire({"admin", "word-tag-mapping-edit"})
+    @Menu(id = "word-tag-mapping-edit", pid = "word-tag-mapping", name = "标签单词映射表-编辑", orderNum = 2, type = "API", level = 2)
     public BaseResp edit(final WordTagMapping entity) {
         wordTagMappingService.updateById(entity);
 
         return RespUtil.success();
+    }
+
+    /**
+    * 明细
+    * @param id 主键
+    * @return 结果
+    */
+    @RequestMapping("/detail/{id}")
+    @ResponseBody
+    @PrivilegeAcquire({"admin", "word-tag-mapping-detail"})
+    @Menu(id = "word-tag-mapping-detail", pid = "word-tag-mapping", name = "标签单词映射表-详情", orderNum = 3, type = "API", level = 2)
+    public BaseResp detail(@PathVariable final Integer id) {
+        WordTagMapping entity = wordTagMappingService.selectById(id);
+
+        return RespUtil.of(entity);
     }
 
     /**
@@ -79,6 +105,8 @@ public class WordTagMappingController {
     */
     @RequestMapping("/remove/{id}")
     @ResponseBody
+    @PrivilegeAcquire({"admin", "word-tag-mapping-remove"})
+    @Menu(id = "word-tag-mapping-remove", pid = "word-tag-mapping", name = "标签单词映射表-删除", orderNum = 4, type = "API", level = 2)
     public BaseResp remove(@PathVariable final Integer id) {
         wordTagMappingService.deleteById(id);
         return RespUtil.success();
@@ -91,6 +119,8 @@ public class WordTagMappingController {
     */
     @RequestMapping("/list")
     @ResponseBody
+    @PrivilegeAcquire({"admin", "word-tag-mapping-list"})
+    @Menu(id = "word-tag-mapping-list", pid = "word-tag-mapping", name = "标签单词映射表-列表", orderNum = 5, type = "API", level = 2)
     public BaseResp list(@RequestBody WordTagMappingPagePo pageReq) {
         BasePageInfo<WordTagMapping> pageInfo = wordTagMappingService.pageQueryList(pageReq);
         return RespUtil.of(pageInfo);
@@ -104,6 +134,8 @@ public class WordTagMappingController {
     @RequestMapping("/export")
     @ResponseBody
     @CrossOrigin
+    @PrivilegeAcquire({"admin", "word-tag-mapping-export"})
+    @Menu(id = "word-tag-mapping-export", pid = "word-tag-mapping", name = "标签单词映射表-导出", orderNum = 6, type = "API", level = 2)
     public void export(@RequestBody WordTagMappingPagePo pageReq, HttpServletResponse response) {
         final String fileName = "文件导出-标签单词映射表-" + System.currentTimeMillis() + ".xls";
         File file = new File(fileName);
@@ -129,10 +161,24 @@ public class WordTagMappingController {
                 out.flush();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
             FileUtil.deleteFile(file);
         }
     }
 
+    /**
+    * 批量删除
+    *
+    * @param ids 唯一主键
+    * @return 结果
+    */
+    @RequestMapping("/deleteBatch")
+    @ResponseBody
+    @PrivilegeAcquire({"admin", "word-tag-mapping-deleteBatch"})
+    @Menu(id = "word-tag-mapping-deleteBatch", pid = "word-tag-mapping", name = "标签单词映射表-批量删除", orderNum = 7, type = "API", level = 2)
+    public BaseResp deleteBatch(@RequestBody List<Integer> ids) {
+        wordTagMappingService.deleteBatch(ids);
+        return RespUtil.success();
+    }
 }

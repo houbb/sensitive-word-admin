@@ -19,7 +19,14 @@
         </dependency>
 
         <!--======================= INTER =====================-->
-
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>menu-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>privilege-core</artifactId>
+        </dependency>
 
         <!--======================= OTHER =====================-->
         <dependency>
@@ -39,6 +46,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
     </dependencies>

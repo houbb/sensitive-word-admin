@@ -8,7 +8,7 @@ import com.github.houbb.sensitive.word.admin.dal.entity.WordTagMapping;
  * </p>
  *
  * @author Administrator
- * @since 2021-07-07
+ * @since 2024-01-29
  */
 public class WordTagMappingPagePo extends WordTagMapping {
 

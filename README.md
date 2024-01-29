@@ -1,6 +1,6 @@
 # sensitive-word-admin
 
-[sensitive-word-admin](https://github.com/houbb/sensitive-word-admin) 是 sensitive-word 配套使用的控台。
+[sensitive-word-admin](https://github.com/houbb/sensitive-word-admin) 是和 [sensitive-word](https://github.com/houbb/sensitive-word) 配套使用的控台。
 
 [![Build Status](https://travis-ci.com/houbb/sensitive-word-admin.svg?branch=master)](https://travis-ci.com/houbb/sensitive-word-admin)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/sensitive-word-admin/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/sensitive-word-admin)
@@ -13,14 +13,52 @@
 
 > [变更日志](https://github.com/houbb/sensitive-word-admin/blob/master/CHANGELOG.md)
 
+# 启动
+
+## 数据库脚本
+
+mysql 执行数据库脚本：
+
+> [mysql-5.7.sql](https://github.com/houbb/sensitive-word-admin/blob/master/sensitive-word-admin-dal/src/main/resources/sql/mysql-5.7.sql)
+
+测试版本为 mysql5.7，理论 8.0 也支持。
+
+## 编译
+
+```bash
+mvn clean install -DskipTests=true
+```
+
+建议 jdk 1.8
+
+## 启动
+
+运行 [Application#main()](https://github.com/houbb/sensitive-word-admin/blob/master/sensitive-word-admin-web/src/main/java/com/github/houbb/sensitive/word/admin/Application.java)
+
+启动成功后，访问：
+
+> [http://localhost:8080/](http://localhost:8080/)
+
+![登录首页](sensitive-word-admin-index.png)
+
+## 操作
+
+功能管理进行初步操作，其他待后续完善。
+
+ApiSensitiveWordController 中包含对应的 api 方法，后续可以添加验签等校验。
+
 # Road-Map
 
-- [ ] 敏感词的数据大盘
-
+- [ ] 登录/登出
+- [ ] 页面操作的权限管理
+- [ ] 调用方系统 token 注册管理
 - [ ] 调用 API
-
+- [ ] 敏感词的数据大盘
 - [ ] 调用信息数据大盘
+- [ ] 操作审计日志
 
-# 应用分支
+# 开源矩阵
 
-[release_1.0.0-第一次初始化](https://github.com/houbb/sensitive-word-admin/tree/release_1.0.0)
+[sensitive-word 基于 DFA 算法实现的高性能敏感词工具](https://github.com/houbb/sensitive-word)
+
+[sensitive 基于注解的 java 日志脱敏工具框架，更加优雅的日志打印](https://github.com/houbb/sensitive)

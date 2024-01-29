@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Administrator
- * @since 2021-07-07
+ * @since 2024-01-29
  */
 public class LcEnumMapping implements Serializable {
 
