@@ -4,6 +4,7 @@ import com.github.houbb.menu.api.annotation.Menu;
 import com.github.houbb.auto.log.annotation.AutoLog;
 import com.github.houbb.heaven.util.io.FileUtil;
 import com.github.houbb.iexcel.util.ExcelHelper;
+import com.github.houbb.sensitive.word.admin.web.config.MySensitiveWordManage;
 import com.github.houbb.web.common.dto.resp.BaseResp;
 import com.github.houbb.web.common.dto.resp.BasePageInfo;
 import com.github.houbb.web.common.util.RespUtil;
@@ -42,6 +43,9 @@ public class WordController {
     @Autowired
     private WordService wordService;
 
+    @Autowired
+    private MySensitiveWordManage mySensitiveWordManage;
+
     /**
     * 首页信息
     * @return 结果
@@ -65,6 +69,7 @@ public class WordController {
     public BaseResp add(@RequestBody final Word entity) {
         wordService.insert(entity);
 
+        mySensitiveWordManage.refresh();
         return RespUtil.success();
     }
 
@@ -80,6 +85,7 @@ public class WordController {
     public BaseResp edit(final Word entity) {
         wordService.updateById(entity);
 
+        mySensitiveWordManage.refresh();
         return RespUtil.success();
     }
 
@@ -109,6 +115,8 @@ public class WordController {
     @Menu(id = "word-remove", pid = "word", name = "敏感词表-删除", orderNum = 4, type = "API", level = 2)
     public BaseResp remove(@PathVariable final Integer id) {
         wordService.deleteById(id);
+
+        mySensitiveWordManage.refresh();
         return RespUtil.success();
     }
 
@@ -179,6 +187,8 @@ public class WordController {
     @Menu(id = "word-deleteBatch", pid = "word", name = "敏感词表-批量删除", orderNum = 7, type = "API", level = 2)
     public BaseResp deleteBatch(@RequestBody List<Integer> ids) {
         wordService.deleteBatch(ids);
+
+        mySensitiveWordManage.refresh();
         return RespUtil.success();
     }
 }

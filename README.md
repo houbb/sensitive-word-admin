@@ -11,6 +11,8 @@
 
 - 基本的 CRUD
 
+- 敏感词修改实时生效
+
 > [变更日志](https://github.com/houbb/sensitive-word-admin/blob/master/CHANGELOG.md)
 
 # 启动
