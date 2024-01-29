@@ -45,7 +45,19 @@ mvn clean install -DskipTests=true
 
 功能管理进行初步操作，其他待后续完善。
 
+# API
+
 ApiSensitiveWordController 中包含对应的 api 方法，后续可以添加验签等校验。
+
+## 接口列表
+
+| api | 入参 | 出参 | 说明 |
+|:----|:----|:----|:------|
+| /api/sensitiveWord/contains | string | boolean | 是否包含敏感词 |
+| /api/sensitiveWord/findAll | string | `List<String>` | 获取所有的敏感词 |
+| /api/sensitiveWord/findFist | string | string | 获取第一个的敏感词 |
+| /api/sensitiveWord/replace | string | string | 获取替换后的结果 |
+| /api/sensitiveWord/tags | string | `Set<String>` | 获取敏感词的标签列表 |
 
 # Road-Map
 

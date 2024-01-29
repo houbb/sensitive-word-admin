@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * api 服务
@@ -47,6 +48,33 @@ public class ApiSensitiveWordController {
         List<String> results = sensitiveWordBs.findAll(text);
 
         return RespUtil.of(results);
+    }
+
+    /**
+     * 获取第一个的敏感词
+     * @param text 文本
+     * @return 结果
+     * @since 1.2.0
+     */
+    @RequestMapping("/findFist")
+    public BaseResp findFist(@RequestParam("text") String text) {
+        String results = sensitiveWordBs.findFirst(text);
+
+        return RespUtil.of(results);
+    }
+
+    /**
+     * 获取敏感词的标签列表
+     *
+     * @param text 文本
+     * @return 结果
+     * @since 1.2.0
+     */
+    @RequestMapping("/tags")
+    public BaseResp tags(@RequestParam("text") String text) {
+        Set<String> tags = sensitiveWordBs.tags(text);
+
+        return RespUtil.of(tags);
     }
 
     /**
