@@ -33,3 +33,8 @@ spring:
 mybatis-plus:
   mapper-locations: classpath*:com/github/houbb/sensitive/word/admin/dal/mapper/*Mapper.xml
   type-aliases-package: com.github.houbb.sensitive.word.admin.dal.entity
+
+
+# 敏感词
+sensitive-word:
+  refresh-interval-seconds: 300
