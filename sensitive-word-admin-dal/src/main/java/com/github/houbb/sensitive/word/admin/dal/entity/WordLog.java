@@ -14,8 +14,8 @@ import java.io.Serializable;
  * 敏感词操作日志表
  * </p>
  *
- * @author Administrator
- * @since 2024-01-29
+ * @author dh
+ * @since 2024-02-05
  */
 public class WordLog implements Serializable {
 
@@ -43,6 +43,20 @@ public class WordLog implements Serializable {
     private String word;
 
     /**
+     * 变更前单词
+     */
+    @TableField("word_before")
+    @ExcelField(headName = "变更前单词")
+    private String wordBefore;
+
+    /**
+     * 变更后单词
+     */
+    @TableField("word_after")
+    @ExcelField(headName = "变更后单词")
+    private String wordAfter;
+
+    /**
      * 类型
      */
     @TableField("type")
@@ -50,10 +64,10 @@ public class WordLog implements Serializable {
     private String type;
 
     /**
-     * 单词状态。S:启用;F:禁用
+     * 单词状态
      */
     @TableField("status")
-    @ExcelField(headName = "单词状态。S:启用;F:禁用")
+    @ExcelField(headName = "单词状态")
     private String status;
 
     /**
@@ -62,6 +76,13 @@ public class WordLog implements Serializable {
     @TableField("remark")
     @ExcelField(headName = "配置描述")
     private String remark;
+
+    /**
+     * 操作类别
+     */
+    @TableField("operator_type")
+    @ExcelField(headName = "操作类别")
+    private String operatorType;
 
     /**
      * 操作员名称
@@ -105,6 +126,20 @@ public class WordLog implements Serializable {
     public void setWord(String word) {
         this.word = word;
     }
+    public String getWordBefore() {
+        return wordBefore;
+    }
+
+    public void setWordBefore(String wordBefore) {
+        this.wordBefore = wordBefore;
+    }
+    public String getWordAfter() {
+        return wordAfter;
+    }
+
+    public void setWordAfter(String wordAfter) {
+        this.wordAfter = wordAfter;
+    }
     public String getType() {
         return type;
     }
@@ -125,6 +160,13 @@ public class WordLog implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+    public String getOperatorType() {
+        return operatorType;
+    }
+
+    public void setOperatorType(String operatorType) {
+        this.operatorType = operatorType;
     }
     public String getOperatorId() {
         return operatorId;
@@ -154,9 +196,12 @@ public class WordLog implements Serializable {
         "id=" + id +
         ", batchId=" + batchId +
         ", word=" + word +
+        ", wordBefore=" + wordBefore +
+        ", wordAfter=" + wordAfter +
         ", type=" + type +
         ", status=" + status +
         ", remark=" + remark +
+        ", operatorType=" + operatorType +
         ", operatorId=" + operatorId +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +

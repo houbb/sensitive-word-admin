@@ -7,8 +7,8 @@ import com.github.houbb.sensitive.word.admin.dal.entity.Word;
  * 敏感词表-分页查询对象
  * </p>
  *
- * @author Administrator
- * @since 2024-01-29
+ * @author dh
+ * @since 2024-02-05
  */
 public class WordPagePo extends Word {
 

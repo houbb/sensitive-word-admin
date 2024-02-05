@@ -12,8 +12,8 @@ import java.util.List;
  * 敏感词表 服务类
  * </p>
  *
- * @author Administrator
- * @since 2024-01-29
+ * @author dh
+ * @since 2024-02-05
  */
 public interface WordService extends IService<Word> {
 

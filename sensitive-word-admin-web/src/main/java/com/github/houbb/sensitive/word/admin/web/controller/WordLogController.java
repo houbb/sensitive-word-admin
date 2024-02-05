@@ -30,8 +30,8 @@ import java.util.List;
  * 敏感词操作日志表 前端控制器
  * </p>
  *
- * @author Administrator
- * @since 2024-01-29
+ * @author dh
+ * @since 2024-02-05
  */
 @Controller
 @RequestMapping("/wordLog")

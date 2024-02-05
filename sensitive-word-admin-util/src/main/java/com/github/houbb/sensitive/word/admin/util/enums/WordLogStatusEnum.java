@@ -2,7 +2,7 @@ package com.github.houbb.sensitive.word.admin.util.enums;
 
 /**
 * 枚举值
-* @author Administrator
+* @author dh
 */
 public enum WordLogStatusEnum {
     /**

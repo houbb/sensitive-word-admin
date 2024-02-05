@@ -14,8 +14,8 @@ import java.io.Serializable;
  * 敏感词表
  * </p>
  *
- * @author Administrator
- * @since 2024-01-29
+ * @author dh
+ * @since 2024-02-05
  */
 public class Word implements Serializable {
 

@@ -4,7 +4,6 @@ import com.github.houbb.menu.api.annotation.Menu;
 import com.github.houbb.auto.log.annotation.AutoLog;
 import com.github.houbb.heaven.util.io.FileUtil;
 import com.github.houbb.iexcel.util.ExcelHelper;
-import com.github.houbb.sensitive.word.admin.web.config.MySensitiveWordScheduleRefresh;
 import com.github.houbb.web.common.dto.resp.BaseResp;
 import com.github.houbb.web.common.dto.resp.BasePageInfo;
 import com.github.houbb.web.common.util.RespUtil;
@@ -31,8 +30,8 @@ import java.util.List;
  * 敏感词表 前端控制器
  * </p>
  *
- * @author Administrator
- * @since 2024-01-29
+ * @author dh
+ * @since 2024-02-05
  */
 @Controller
 @RequestMapping("/word")
@@ -66,9 +65,6 @@ public class WordController {
     public BaseResp add(@RequestBody final Word entity) {
         wordService.insert(entity);
 
-        //TODO: 每次的操作变化，记录日志。
-        // 操作类别  INSERT/UPDATE/DELETE 记录 before&after，便于后续单个的变更拓展。
-
         return RespUtil.success();
     }
 
@@ -83,6 +79,7 @@ public class WordController {
     @Menu(id = "word-edit", pid = "word", name = "敏感词表-编辑", orderNum = 2, type = "API", level = 2)
     public BaseResp edit(final Word entity) {
         wordService.updateById(entity);
+
         return RespUtil.success();
     }
 

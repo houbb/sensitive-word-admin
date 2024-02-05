@@ -7,8 +7,8 @@ import com.github.houbb.sensitive.word.admin.dal.entity.WordTagMapping;
  * 标签单词映射表-分页查询对象
  * </p>
  *
- * @author Administrator
- * @since 2024-01-29
+ * @author dh
+ * @since 2024-02-05
  */
 public class WordTagMappingPagePo extends WordTagMapping {
 

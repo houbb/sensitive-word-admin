@@ -24,8 +24,8 @@ import java.util.Collections;
  * 标签单词映射表 服务实现类
  * </p>
  *
- * @author Administrator
- * @since 2024-01-29
+ * @author dh
+ * @since 2024-02-05
  */
 @Service
 public class WordTagMappingServiceImpl extends ServiceImpl<WordTagMappingMapper, WordTagMapping> implements WordTagMappingService {

@@ -24,6 +24,14 @@
                             <el-input v-model="queryForm.word"
                                       style="width: 217px;"></el-input>
                         </el-form-item>
+                        <el-form-item label="变更前单词" label-width="100px">
+                            <el-input v-model="queryForm.wordBefore"
+                                      style="width: 217px;"></el-input>
+                        </el-form-item>
+                        <el-form-item label="变更后单词" label-width="100px">
+                            <el-input v-model="queryForm.wordAfter"
+                                      style="width: 217px;"></el-input>
+                        </el-form-item>
                         <el-form-item label="类型" label-width="100px">
                             <el-select v-model="queryForm.type" placeholder="请选择">
                                 <el-option
@@ -34,7 +42,7 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="单词状态。S:启用;F:禁用" label-width="100px">
+                        <el-form-item label="单词状态" label-width="100px">
                             <el-select v-model="queryForm.status" placeholder="请选择">
                                 <el-option
                                         v-for="item in statusOptions"
@@ -47,6 +55,16 @@
                         <el-form-item label="配置描述" label-width="100px">
                             <el-input v-model="queryForm.remark"
                                       style="width: 217px;"></el-input>
+                        </el-form-item>
+                        <el-form-item label="操作类别" label-width="100px">
+                            <el-select v-model="queryForm.operatorType" placeholder="请选择">
+                                <el-option
+                                        v-for="item in operatorTypeOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
 
                 <el-form-item>
@@ -88,6 +106,16 @@
                         </el-table-column>
 
                         <el-table-column
+                                property="wordBefore"
+                                label="变更前单词">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="wordAfter"
+                                label="变更后单词">
+                        </el-table-column>
+
+                        <el-table-column
                                 property="type"
                                 label="类型"
                                 :formatter="typeFormatter">
@@ -95,13 +123,19 @@
 
                         <el-table-column
                                 property="status"
-                                label="单词状态。S:启用;F:禁用"
+                                label="单词状态"
                                 :formatter="statusFormatter">
                         </el-table-column>
 
                         <el-table-column
                                 property="remark"
                                 label="配置描述">
+                        </el-table-column>
+
+                        <el-table-column
+                                property="operatorType"
+                                label="操作类别"
+                                :formatter="operatorTypeFormatter">
                         </el-table-column>
 
                         <el-table-column
@@ -164,6 +198,18 @@
                             <el-input v-model="addForm.word" style="width: 217px;">
                             </el-input>
                         </el-form-item>
+                        <el-form-item label="变更前单词"
+                                      prop="wordBefore"
+                                      label-width="100px">
+                            <el-input v-model="addForm.wordBefore" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item label="变更后单词"
+                                      prop="wordAfter"
+                                      label-width="100px">
+                            <el-input v-model="addForm.wordAfter" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
                         <el-form-item label="类型" label-width="100px">
                             <el-select v-model="addForm.type" placeholder="请选择">
                                 <el-option
@@ -174,7 +220,7 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="单词状态。S:启用;F:禁用" label-width="100px">
+                        <el-form-item label="单词状态" label-width="100px">
                             <el-select v-model="addForm.status" placeholder="请选择">
                                 <el-option
                                         v-for="item in statusOptions"
@@ -189,6 +235,16 @@
                                       label-width="100px">
                             <el-input v-model="addForm.remark" style="width: 217px;">
                             </el-input>
+                        </el-form-item>
+                        <el-form-item label="操作类别" label-width="100px">
+                            <el-select v-model="addForm.operatorType" placeholder="请选择">
+                                <el-option
+                                        v-for="item in operatorTypeOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -212,6 +268,18 @@
                             <el-input v-model="editForm.word" style="width: 217px;">
                             </el-input>
                         </el-form-item>
+                        <el-form-item label="变更前单词"
+                                      prop="wordBefore"
+                                      label-width="100px">
+                            <el-input v-model="editForm.wordBefore" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item label="变更后单词"
+                                      prop="wordAfter"
+                                      label-width="100px">
+                            <el-input v-model="editForm.wordAfter" style="width: 217px;">
+                            </el-input>
+                        </el-form-item>
                         <el-form-item label="类型" label-width="100px">
                             <el-select v-model="editForm.type" placeholder="请选择">
                                 <el-option
@@ -222,7 +290,7 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="单词状态。S:启用;F:禁用" label-width="100px">
+                        <el-form-item label="单词状态" label-width="100px">
                             <el-select v-model="editForm.status" placeholder="请选择">
                                 <el-option
                                         v-for="item in statusOptions"
@@ -237,6 +305,16 @@
                                       label-width="100px">
                             <el-input v-model="editForm.remark" style="width: 217px;">
                             </el-input>
+                        </el-form-item>
+                        <el-form-item label="操作类别" label-width="100px">
+                            <el-select v-model="editForm.operatorType" placeholder="请选择">
+                                <el-option
+                                        v-for="item in operatorTypeOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -286,28 +364,51 @@
                             label: '正常'
                         },
                     ],
+                    operatorTypeOptions: [
+                        {
+                            value: 'CREATE',
+                            label: '新增'
+                        },
+                        {
+                            value: 'DELETE',
+                            label: '删除'
+                        },
+                        {
+                            value: 'UPDATE',
+                            label: '更新'
+                        },
+                    ],
             dialogAddVisible: false,
             addForm: {
                 batchId: '',
                 word: '',
+                wordBefore: '',
+                wordAfter: '',
                 type: '',
                 status: '',
                 remark: '',
+                operatorType: '',
             },
             queryForm: {
                 batchId: null,
                 word: null,
+                wordBefore: null,
+                wordAfter: null,
                 type: null,
                 status: null,
                 remark: null,
+                operatorType: null,
             },
             dialogEditVisible: false,
             editForm: {
                 batchId: '',
                 word: '',
+                wordBefore: '',
+                wordAfter: '',
                 type: '',
                 status: '',
                 remark: '',
+                operatorType: '',
             },
         },
         mounted () {
@@ -336,15 +437,29 @@
                         return '正常';
                     }
                 },
+                operatorTypeFormatter(row, column) {
+                    if(row.operatorType === 'CREATE') {
+                        return '新增';
+                    }
+                    if(row.operatorType === 'DELETE') {
+                        return '删除';
+                    }
+                    if(row.operatorType === 'UPDATE') {
+                        return '更新';
+                    }
+                },
 
             doQuery() {
                 var req = {
                     id: this.queryForm.id,
                     batchId: this.queryForm.batchId,
                     word: this.queryForm.word,
+                    wordBefore: this.queryForm.wordBefore,
+                    wordAfter: this.queryForm.wordAfter,
                     type: this.queryForm.type,
                     status: this.queryForm.status,
                     remark: this.queryForm.remark,
+                    operatorType: this.queryForm.operatorType,
                     operatorId: this.queryForm.operatorId,
                     createTime: this.queryForm.createTime,
                     updateTime: this.queryForm.updateTime,
@@ -371,9 +486,12 @@
                 this.queryForm.id = null;
                 this.queryForm.batchId = null;
                 this.queryForm.word = null;
+                this.queryForm.wordBefore = null;
+                this.queryForm.wordAfter = null;
                 this.queryForm.type = null;
                 this.queryForm.status = null;
                 this.queryForm.remark = null;
+                this.queryForm.operatorType = null;
                 this.queryForm.operatorId = null;
                 this.queryForm.createTime = null;
                 this.queryForm.updateTime = null;
@@ -385,9 +503,12 @@
                     id: this.queryForm.id,
                     batchId: this.queryForm.batchId,
                     word: this.queryForm.word,
+                    wordBefore: this.queryForm.wordBefore,
+                    wordAfter: this.queryForm.wordAfter,
                     type: this.queryForm.type,
                     status: this.queryForm.status,
                     remark: this.queryForm.remark,
+                    operatorType: this.queryForm.operatorType,
                     operatorId: this.queryForm.operatorId,
                     createTime: this.queryForm.createTime,
                     updateTime: this.queryForm.updateTime,
@@ -464,9 +585,12 @@
                     id: this.addForm.id,
                     batchId: this.addForm.batchId,
                     word: this.addForm.word,
+                    wordBefore: this.addForm.wordBefore,
+                    wordAfter: this.addForm.wordAfter,
                     type: this.addForm.type,
                     status: this.addForm.status,
                     remark: this.addForm.remark,
+                    operatorType: this.addForm.operatorType,
                     operatorId: this.addForm.operatorId,
                     createTime: this.addForm.createTime,
                     updateTime: this.addForm.updateTime,
@@ -496,9 +620,12 @@
                 this.editForm.id = row.id;
                 this.editForm.batchId = row.batchId;
                 this.editForm.word = row.word;
+                this.editForm.wordBefore = row.wordBefore;
+                this.editForm.wordAfter = row.wordAfter;
                 this.editForm.type = row.type;
                 this.editForm.status = row.status;
                 this.editForm.remark = row.remark;
+                this.editForm.operatorType = row.operatorType;
                 this.editForm.operatorId = row.operatorId;
                 this.editForm.createTime = row.createTime;
                 this.editForm.updateTime = row.updateTime;
@@ -515,9 +642,12 @@
                     id: this.editForm.id,
                     batchId: this.editForm.batchId,
                     word: this.editForm.word,
+                    wordBefore: this.editForm.wordBefore,
+                    wordAfter: this.editForm.wordAfter,
                     type: this.editForm.type,
                     status: this.editForm.status,
                     remark: this.editForm.remark,
+                    operatorType: this.editForm.operatorType,
                     operatorId: this.editForm.operatorId,
                     createTime: this.editForm.createTime,
                     updateTime: this.editForm.updateTime,

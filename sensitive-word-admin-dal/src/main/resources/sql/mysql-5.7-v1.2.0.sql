@@ -70,22 +70,15 @@ create table word_log
     id int unsigned auto_increment comment '应用自增主键' primary key,
     batch_id varchar(128) not null comment '批次号',
     word varchar(128) not null comment '单词',
-    word_before varchar(128) null comment '变更前单词',
-    word_after varchar(128) null comment '变更后单词',
     type varchar(8) not null comment '类型',
-    status char(1) not null default 'S' comment '单词状态',
+    status char(1) not null default 'S' comment '单词状态。S:启用;F:禁用',
     remark varchar(64) not null comment '配置描述' default '',
-    operator_type varchar(16) not null default '' comment '操作类别',
     operator_id varchar(64) not null default 'system' comment '操作员名称',
     create_time timestamp default CURRENT_TIMESTAMP not null comment '创建时间戳',
     update_time timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间戳'
 ) comment '敏感词操作日志表' ENGINE=Innodb default charset=UTF8 auto_increment=1;
 create index ix_word on word_log (word) comment '单词普通索引';
 create index ix_batch_id on word_log (batch_id) comment '批次号普通索引';
-
-insert into lc_enum_mapping (table_name, column_name, `key`, label)  values ('word_log', 'operator_type', 'CREATE', '新增');
-insert into lc_enum_mapping (table_name, column_name, `key`, label)  values ('word_log', 'operator_type', 'DELETE', '删除');
-insert into lc_enum_mapping (table_name, column_name, `key`, label)  values ('word_log', 'operator_type', 'UPDATE', '更新');
 
 create table tag
 (

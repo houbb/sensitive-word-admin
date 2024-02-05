@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * 标签单词映射表 Mapper 接口
  * </p>
  *
- * @author Administrator
- * @since 2024-01-29
+ * @author dh
+ * @since 2024-02-05
  */
 public interface WordTagMappingMapper extends BaseMapper<WordTagMapping> {
 

@@ -4,12 +4,13 @@ package com.github.houbb.sensitive.word.admin.util.enums;
 * 枚举值
 * @author dh
 */
-public enum WordStatusEnum {
+public enum WordLogOperatorTypeEnum {
     /**
     * 枚举值
     */
-    F("F", "失效"),
-    S("S", "正常"),
+    CREATE("CREATE", "新增"),
+    DELETE("DELETE", "删除"),
+    UPDATE("UPDATE", "更新"),
     ;
 
     /**
@@ -22,7 +23,7 @@ public enum WordStatusEnum {
     */
     private final String desc;
 
-    WordStatusEnum(String code, String desc) {
+    WordLogOperatorTypeEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }
