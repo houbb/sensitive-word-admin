@@ -82,6 +82,7 @@ create table word_log
 ) comment '敏感词操作日志表' ENGINE=Innodb default charset=UTF8 auto_increment=1;
 create index ix_word on word_log (word) comment '单词普通索引';
 create index ix_batch_id on word_log (batch_id) comment '批次号普通索引';
+create index ix_update_time on word_log (update_time) comment '更新时间普通索引';
 
 insert into lc_enum_mapping (table_name, column_name, `key`, label)  values ('word_log', 'operator_type', 'CREATE', '新增');
 insert into lc_enum_mapping (table_name, column_name, `key`, label)  values ('word_log', 'operator_type', 'DELETE', '删除');

@@ -4,6 +4,7 @@ import com.github.houbb.menu.api.annotation.Menu;
 import com.github.houbb.auto.log.annotation.AutoLog;
 import com.github.houbb.heaven.util.io.FileUtil;
 import com.github.houbb.iexcel.util.ExcelHelper;
+import com.github.houbb.sensitive.word.admin.web.biz.WordBiz;
 import com.github.houbb.web.common.dto.resp.BaseResp;
 import com.github.houbb.web.common.dto.resp.BasePageInfo;
 import com.github.houbb.web.common.util.RespUtil;
@@ -42,6 +43,9 @@ public class WordController {
     @Autowired
     private WordService wordService;
 
+    @Autowired
+    private WordBiz wordBiz;
+
     /**
     * 首页信息
     * @return 结果
@@ -63,7 +67,7 @@ public class WordController {
     @PrivilegeAcquire({"admin", "word-add"})
     @Menu(id = "word-add", pid = "word", name = "敏感词表-添加", orderNum = 1, type = "API", level = 2)
     public BaseResp add(@RequestBody final Word entity) {
-        wordService.insert(entity);
+        wordBiz.addTx(entity);
 
         return RespUtil.success();
     }
@@ -78,7 +82,7 @@ public class WordController {
     @PrivilegeAcquire({"admin", "word-edit"})
     @Menu(id = "word-edit", pid = "word", name = "敏感词表-编辑", orderNum = 2, type = "API", level = 2)
     public BaseResp edit(final Word entity) {
-        wordService.updateById(entity);
+        wordBiz.editTx(entity);
 
         return RespUtil.success();
     }
@@ -108,7 +112,8 @@ public class WordController {
     @PrivilegeAcquire({"admin", "word-remove"})
     @Menu(id = "word-remove", pid = "word", name = "敏感词表-删除", orderNum = 4, type = "API", level = 2)
     public BaseResp remove(@PathVariable final Integer id) {
-        wordService.deleteById(id);
+        wordBiz.removeTx(id);
+
         return RespUtil.success();
     }
 
@@ -178,7 +183,8 @@ public class WordController {
     @PrivilegeAcquire({"admin", "word-deleteBatch"})
     @Menu(id = "word-deleteBatch", pid = "word", name = "敏感词表-批量删除", orderNum = 7, type = "API", level = 2)
     public BaseResp deleteBatch(@RequestBody List<Integer> ids) {
-        wordService.deleteBatch(ids);
+        wordBiz.removeBatchTx(ids);
         return RespUtil.success();
     }
+
 }
