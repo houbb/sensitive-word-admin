@@ -2,6 +2,7 @@ package com.github.houbb.sensitive.word.admin.web.config;
 
 import com.github.houbb.sensitive.word.admin.service.support.sensitive.MyDdWordAllow;
 import com.github.houbb.sensitive.word.admin.service.support.sensitive.MyDdWordDeny;
+import com.github.houbb.sensitive.word.admin.service.support.sensitive.MyDdWordTags;
 import com.github.houbb.sensitive.word.bs.SensitiveWordBs;
 import com.github.houbb.sensitive.word.support.allow.WordAllows;
 import com.github.houbb.sensitive.word.support.deny.WordDenys;
@@ -23,6 +24,14 @@ public class SensitiveWordConfig {
     private MyDdWordDeny myDdWordDeny;
 
     /**
+     * 自定义单词标签
+     *
+     * @since v1.4.0
+     */
+    @Autowired
+    private MyDdWordTags myDdWordTags;
+
+    /**
      * 初始化引导类
      * @return 初始化引导类
      * @since 1.0.0
@@ -32,6 +41,7 @@ public class SensitiveWordConfig {
         return SensitiveWordBs.newInstance()
                 .wordAllow(WordAllows.chains(WordAllows.defaults(), myDdWordAllow))
                 .wordDeny(WordDenys.chains(WordDenys.defaults(), myDdWordDeny))
+                .wordTag(myDdWordTags)
                 .ignoreRepeat(false)
                 // 各种其他配置
                 .init();

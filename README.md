@@ -67,6 +67,103 @@ ApiSensitiveWordController 中包含对应的 api 方法，后续可以添加验
 | /api/sensitiveWord/replace | string | string | 获取替换后的结果 |
 | /api/sensitiveWord/tags | string | `Set<String>` | 获取敏感词的标签列表 |
 
+
+# 如何自定义标签
+
+## 自定义单词 TAG
+
+我们在配置中指定：
+
+```java
+@Configuration
+public class SensitiveWordConfig {
+
+    @Autowired
+    private MyDdWordAllow myDdWordAllow;
+
+    @Autowired
+    private MyDdWordDeny myDdWordDeny;
+
+    /**
+     * 自定义单词标签
+     *
+     * @since v1.4.0
+     */
+    @Autowired
+    private MyDdWordTags myDdWordTags;
+
+    /**
+     * 初始化引导类
+     * @return 初始化引导类
+     * @since 1.0.0
+     */
+    @Bean
+    public SensitiveWordBs sensitiveWordBs() {
+        return SensitiveWordBs.newInstance()
+                .wordAllow(WordAllows.chains(WordAllows.defaults(), myDdWordAllow))
+                .wordDeny(WordDenys.chains(WordDenys.defaults(), myDdWordDeny))
+                .wordTag(myDdWordTags)
+                .ignoreRepeat(false)
+                // 各种其他配置
+                .init();
+    }
+
+}
+```
+
+## MyDdWordTags 自定义实现
+
+MyDdWordTags 是一个实现的例子：
+
+核心分为两步：
+
+1）根据【标签单词映射表】获取单词对应的标签编码(tag_code) 列表
+
+2）根据【标签表】中的 tag_code 去查询对应的 标签描述(标签描述)
+
+所以需要分别配置二者，然后进行关联。
+
+```java
+@Component
+public class MyDdWordTags implements IWordTag {
+
+    @Autowired
+    private WordTagMappingService wordTagMappingService;
+
+    @Autowired
+    private TagService tagService;
+
+    @Override
+    public Set<String> getTag(String word) {
+        if(StringUtil.isEmpty(word)) {
+            return Collections.emptySet();
+        }
+
+        // 获取单词对应的 TAG codes
+        Wrapper<WordTagMapping> wordTagMappingWrapper = new EntityWrapper<>();
+        wordTagMappingWrapper.eq("word", word);
+        wordTagMappingWrapper.setSqlSelect("tag_code");
+        List<WordTagMapping> mappingList = wordTagMappingService.selectList(wordTagMappingWrapper);
+        if(CollectionUtil.isEmpty(mappingList)) {
+            return Collections.emptySet();
+        }
+
+        // 根据 tag code 获取对应的 TAG LABEL
+        List<String> wordTagCodeList = mappingList.stream().map(WordTagMapping::getTagCode).collect(Collectors.toList());
+        Wrapper<Tag> tagWrapper = new EntityWrapper<>();
+        tagWrapper.eq("status", TagStatusEnum.S.getCode());
+        tagWrapper.in("tag_code", wordTagCodeList);
+        tagWrapper.setSqlSelect("tag_label");
+        List<Tag> dbTagList = tagService.selectList(tagWrapper);
+        if(CollectionUtil.isEmpty(dbTagList)) {
+            return Collections.emptySet();
+        }
+        return dbTagList.stream().map(Tag::getTagLabel).collect(Collectors.toSet());
+    }
+
+}
+```
+
 # Road-Map
 
 - [ ] 登录/登出
