@@ -45,7 +45,7 @@
         <iexcel.version>0.0.9</iexcel.version>
         <menu-core.version>1.0.0</menu-core.version>
         <privilege-core.version>0.0.8</privilege-core.version>
-        <sensitive-word.version>0.12.0</sensitive-word.version>
+        <sensitive-word.version>0.26.0</sensitive-word.version>
 
         <!--============================== OTHER ==============================-->
         <fastjson.version>1.2.73</fastjson.version>
