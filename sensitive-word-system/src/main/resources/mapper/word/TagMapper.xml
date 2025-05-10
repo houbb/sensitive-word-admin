@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.houbb.system.mapper.TagMapper">
+    
+    <resultMap type="Tag" id="TagResult">
+        <result property="id"    column="id"    />
+        <result property="tagCode"    column="tag_code"    />
+        <result property="tagLabel"    column="tag_label"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTagVo">
+        select id, tag_code, tag_label, status, remark, create_by, update_by, create_time, update_time from tag
+    </sql>
+
+    <select id="selectTagList" parameterType="Tag" resultMap="TagResult">
+        <include refid="selectTagVo"/>
+        <where>  
+            <if test="tagCode != null  and tagCode != ''"> and tag_code = #{tagCode}</if>
+            <if test="tagLabel != null  and tagLabel != ''"> and tag_label = #{tagLabel}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTagById" parameterType="Long" resultMap="TagResult">
+        <include refid="selectTagVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTag" parameterType="Tag" useGeneratedKeys="true" keyProperty="id">
+        insert into tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tagCode != null and tagCode != ''">tag_code,</if>
+            <if test="tagLabel != null and tagLabel != ''">tag_label,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tagCode != null and tagCode != ''">#{tagCode},</if>
+            <if test="tagLabel != null and tagLabel != ''">#{tagLabel},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTag" parameterType="Tag">
+        update tag
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tagCode != null and tagCode != ''">tag_code = #{tagCode},</if>
+            <if test="tagLabel != null and tagLabel != ''">tag_label = #{tagLabel},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTagById" parameterType="Long">
+        delete from tag where id = #{id}
+    </delete>
+
+    <delete id="deleteTagByIds" parameterType="String">
+        delete from tag where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

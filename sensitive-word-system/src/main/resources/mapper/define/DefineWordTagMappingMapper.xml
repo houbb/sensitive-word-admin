@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.houbb.system.mapper.define.DefineWordTagMappingMapper">
+
+    <select id="selectAllEnableWordTagList" resultType="com.github.houbb.system.domain.po.WordTagPo">
+        SELECT DISTINCT
+        mapping.word AS word,
+        tag.tag_label AS tagLabel
+        FROM word_tag_mapping mapping
+        INNER JOIN tag tag ON mapping.tag_code = tag.tag_code
+        WHERE tag.status = 'Y'
+    </select>
+
+</mapper>
