@@ -33,6 +33,7 @@
 | [sensitive](https://github.com/houbb/sensitive)                       | 高性能日志脱敏组件             |
 | [auto-log](https://github.com/houbb/auto-log)                         | 统一日志切面组件，支持全链路traceId |
 | [encryption-local](https://github.com/houbb/encryption-local)         | 离线加密机组件               |
+| [encryption](https://github.com/houbb/encryption)         | 加密机标准API+本地客户端        |
 | [encryption-server](https://github.com/houbb/encryption-server)        | 加密机服务                 |
 
 # 本地启动
