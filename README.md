@@ -4,6 +4,8 @@
 
 [sensitive-word-admin](https://github.com/houbb/sensitive-word-admin) 是和 [sensitive-word](https://github.com/houbb/sensitive-word) 配套使用的控台。
 
+为了实现一个让用户开箱即用的敏感词控台而努力~
+
 [![Build Status](https://travis-ci.com/houbb/sensitive-word-admin.svg?branch=master)](https://travis-ci.com/houbb/sensitive-word-admin)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/sensitive-word-admin/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/sensitive-word-admin)
 [![](https://img.shields.io/badge/license-Apache2-FF0080.svg)](https://github.com/houbb/sensitive-word-admin/blob/master/LICENSE.txt)
@@ -14,20 +16,24 @@
 * 权限认证使用Jwt，支持多终端认证系统。
 * 支持加载动态权限菜单，多方式轻松权限控制。
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
+* 敏感词标签的基本管理
 
-## 拓展阅读
-
-> [sensitive-word-admin 敏感词控台 v1.2.0 版本开源](https://mp.weixin.qq.com/s/7wSy0PuJLTudEo9gTY5s5w)
-
-> [sensitive-word 基于 DFA 算法实现的高性能敏感词工具介绍](https://mp.weixin.qq.com/s/OKLCWlOTv_PSi9MIfDpoMw)
-
-## 特性
-
-- 基本的 CRUD
-
-- 敏感词修改实时生效
+## 变更
 
 > [变更日志](https://github.com/houbb/sensitive-word-admin/blob/master/CHANGELOG.md)
+
+## 项目推荐
+
+下面是一些日志、加解密、脱敏安全相关的库推荐：
+
+| 项目                                                                    | 介绍                    |
+|:----------------------------------------------------------------------|:----------------------|
+| [sensitive-word](https://github.com/houbb/sensitive-word)             | 高性能敏感词核心库             |
+| [sensitive-word-admin](https://github.com/houbb/sensitive-word-admin) | 敏感词控台，前后端分离           |
+| [sensitive](https://github.com/houbb/sensitive)                       | 高性能日志脱敏组件             |
+| [auto-log](https://github.com/houbb/auto-log)                         | 统一日志切面组件，支持全链路traceId |
+| [encryption-local](https://github.com/houbb/encryption-local)         | 离线加密机组件               |
+| [encryption-server](https://github.com/houbb/encryption-server)        | 加密机服务                 |
 
 # 本地启动
 
@@ -224,17 +230,36 @@ WHERE tag.status = 'Y'
 
 # road-map
 
+当然，v2.0.0 出版的能力还比较欠缺，用户体验还是不够友好。
+
+感兴趣的小伙伴也可以针对下面的需求进行 PR，[欢迎一起交流](https://mp.weixin.qq.com/s/rkSvXxiiLGjl3S-ZOZCr0Q)。
+
+如果你有需求，可以去这里[issues](https://github.com/houbb/sensitive-word-admin/issues)
+
+## 待改进点
+
 - [ ] 单个词的修改实时生效
 - [ ] word/tags 的修改，增量的变化，而不是全量
 - [ ] word-tag 的处理，改为枚举映射，而不是手动输入
 - [ ] 限定接入系统 appKey appSecret
 - [ ] 系统的调用记录
 - [ ] 数据大盘
-- [ ] word 操作时对应的日志表，有必要存在吗？
+- ~~[ ] word 操作时对应的日志表，有必要存在吗？(可以不保留，ruoyi 本身就有操作日志)~~
 
 # 技术鸣谢
 
 - 感谢 ruoyi-vue 的无私奉献
+
+
+# 拓展阅读
+
+[sensitive-word-admin v1.3.0 发布 如何支持分布式部署？](https://mp.weixin.qq.com/s/4wia8SlQQbLV5_OHplaWvg)
+
+[sensitive-word-admin 敏感词控台 v1.2.0 版本开源](https://mp.weixin.qq.com/s/7wSy0PuJLTudEo9gTY5s5w)
+
+[sensitive-word 基于 DFA 算法实现的高性能敏感词工具介绍](https://mp.weixin.qq.com/s/OKLCWlOTv_PSi9MIfDpoMw)
+
+[更多技术交流](https://mp.weixin.qq.com/s/rkSvXxiiLGjl3S-ZOZCr0Q)
 
 # 开源矩阵
 
